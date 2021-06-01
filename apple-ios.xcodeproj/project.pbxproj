@@ -27,6 +27,7 @@
 		BB2A176126652A1800BBDD13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2A176026652A1800BBDD13 /* GoogleService-Info.plist */; };
 		BB2A176626652D0B00BBDD13 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2A176526652D0B00BBDD13 /* R.generated.swift */; };
 		BB2A1768266531A700BBDD13 /* FirebaseAppleAuthentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2A1767266531A700BBDD13 /* FirebaseAppleAuthentification.swift */; };
+		BB2A176D2666698E00BBDD13 /* FirebaseAppleIDAuthrizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2A176C2666698E00BBDD13 /* FirebaseAppleIDAuthrizationError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		BB2A176026652A1800BBDD13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BB2A176526652D0B00BBDD13 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		BB2A1767266531A700BBDD13 /* FirebaseAppleAuthentification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAppleAuthentification.swift; sourceTree = "<group>"; };
+		BB2A176C2666698E00BBDD13 /* FirebaseAppleIDAuthrizationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAppleIDAuthrizationError.swift; sourceTree = "<group>"; };
 		C6B9A2F6D9B7EC4A2219392D /* Pods_apple_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_apple_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C714CBE0C2EBE46C34946C00 /* Pods-apple-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple-ios.debug.xcconfig"; path = "Target Support Files/Pods-apple-ios/Pods-apple-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		D1D898A160CFD13D58754848 /* Pods-apple-ios-apple-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple-ios-apple-iosUITests.release.xcconfig"; path = "Target Support Files/Pods-apple-ios-apple-iosUITests/Pods-apple-ios-apple-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				BB2A17452665265300BBDD13 /* Resouces */,
 				BB2A17462665266400BBDD13 /* Sources */,
 				BB2A174B266526C700BBDD13 /* Storyborads */,
+				BB2A17692666124800BBDD13 /* Extensions */,
 			);
 			path = "apple-ios";
 			sourceTree = "<group>";
@@ -257,6 +260,14 @@
 				BB2A175A266527AD00BBDD13 /* ViewControllerBase.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		BB2A17692666124800BBDD13 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BB2A176C2666698E00BBDD13 /* FirebaseAppleIDAuthrizationError.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CDE49CD483373C8454E5B7AE /* Frameworks */ = {
@@ -537,6 +548,7 @@
 				BB2A175B266527AD00BBDD13 /* ViewControllerBase.swift in Sources */,
 				BB2A17562665272500BBDD13 /* ViewControllerInstantiable.swift in Sources */,
 				BB2A1768266531A700BBDD13 /* FirebaseAppleAuthentification.swift in Sources */,
+				BB2A176D2666698E00BBDD13 /* FirebaseAppleIDAuthrizationError.swift in Sources */,
 				BB2A174D266526E600BBDD13 /* LoginViewController.swift in Sources */,
 				BB2A176626652D0B00BBDD13 /* R.generated.swift in Sources */,
 				BB2A17152665237B00BBDD13 /* AppDelegate.swift in Sources */,

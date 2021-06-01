@@ -11,17 +11,6 @@ import AuthenticationServices
 // CryptoKitを使用して一般的な暗号化操作を実行する
 import CryptoKit
 
-enum FirebaseAppleIDAuthorizationError: Error {
-    case underlyingError(_: Error)
-    case alreadyRunning
-    case unexpectedError
-    case unsupported
-    case accessTokenNotFound
-    case userNotFound
-    case userLoginCancelled
-    case unknownError
-}
-
 final class FirebaseAppleAuthentification: NSObject {
 
     static let shared = FirebaseAppleAuthentification()
@@ -83,7 +72,7 @@ extension FirebaseAppleAuthentification: ASAuthorizationControllerDelegate {
 
             // Authorizationでエラー
             if let error = error {
-                self?.completion?(false, error)
+                self?.completion?(false, FirebaseAppleIDAuthorizationError.unexpectedError)
                 return
             }
 
@@ -100,7 +89,12 @@ extension FirebaseAppleAuthentification: ASAuthorizationControllerDelegate {
 
     // 失敗した場合
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        self.completion?(false, error)
+        switch error {
+        case ASAuthorizationError.canceled:
+            self.completion?(false, FirebaseAppleIDAuthorizationError.userLoginCancelled)
+        default:
+            self.completion?(false, FirebaseAppleIDAuthorizationError.unexpectedError)
+        }
     }
 }
 

@@ -38,7 +38,7 @@ extension LoginPresenter: LoginPresenterType {
             if isSuccessful {
                 self?.view?.showToast(message: "didUserLogedIn")
             } else {
-                self?.view?.showToast(message: error?.localizedDescription ?? "")
+                self?.view?.showToast(message: error!.errorMessage)
             }
         }
     }
