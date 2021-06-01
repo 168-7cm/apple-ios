@@ -32,8 +32,14 @@ final class LoginPresenter {
 extension LoginPresenter: LoginPresenterType {
     
     func appleIDButtonDidTapped(anchor: ASPresentationAnchor) {
+        self.view?.beginActivityIndicator()
         model?.login(ancher: anchor) { [weak self] (isSuccessful, error) in
-
+            self?.view?.endActivityIndicator()
+            if isSuccessful {
+                self?.view?.showToast(message: "didUserLogedIn")
+            } else {
+                self?.view?.showToast(message: error?.localizedDescription ?? "")
+            }
         }
     }
 }

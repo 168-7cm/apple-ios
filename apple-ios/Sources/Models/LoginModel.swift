@@ -17,8 +17,8 @@ protocol  LoginModelType {
 final class LoginModel: LoginModelType {
 
     func login(ancher: ASPresentationAnchor, completion: @escaping LoginResult) {
-        FirebaseAppleAuthentification.shared.login(ancher: ancher) { [weak self] (string, error) in
-
+        FirebaseAppleAuthentification.shared.login(ancher: ancher) { [weak self] (isSucessful, error) in
+            completion(isSucessful, error)
         }
     }
 }

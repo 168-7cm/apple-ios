@@ -10,6 +10,7 @@ target 'apple-ios' do
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'Toast-Swift', '~> 5.0.1'
 
   target 'apple-iosTests' do
     inherit! :search_paths

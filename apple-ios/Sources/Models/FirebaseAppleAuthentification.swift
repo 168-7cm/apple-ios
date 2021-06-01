@@ -11,21 +11,32 @@ import AuthenticationServices
 // CryptoKitを使用して一般的な暗号化操作を実行する
 import CryptoKit
 
-typealias FirebaseAuthCompletion = (String?, Error?) -> Void
+enum FirebaseAppleIDAuthorizationError: Error {
+    case underlyingError(_: Error)
+    case alreadyRunning
+    case unexpectedError
+    case unsupported
+    case accessTokenNotFound
+    case userNotFound
+    case userLoginCancelled
+    case unknownError
+}
 
 final class FirebaseAppleAuthentification: NSObject {
 
     static let shared = FirebaseAppleAuthentification()
     private var nonce: String? = nil
     private var anchor: ASPresentationAnchor? = nil
+    private var completion: LoginResult?
 
-    func login(ancher: ASPresentationAnchor, completion: FirebaseAuthCompletion?) {
+    func login(ancher: ASPresentationAnchor, completion: LoginResult?) {
 
         // ログインリクエストごとにランダムな文字列「ナンス」を生成します。
         // ナンスは、取得した ID トークンが、当該アプリの認証リクエストへのレスポンスとして付与されたことを確認するために使用します。
         let nonce = self.randomString()
         self.nonce = nonce
         self.anchor = ancher
+        self.completion = { completion?($0, $1); self.completion = nil }
 
         // AppleIDに基づいてユーザーを認証するためのリクエストを生成するメカニズム。
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -61,6 +72,7 @@ extension FirebaseAppleAuthentification: ASAuthorizationControllerDelegate {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
               let appleIDToken = appleIDCredential.identityToken,
               let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+            self.completion?(false, FirebaseAppleIDAuthorizationError.unexpectedError)
             return
         }
 
@@ -68,8 +80,27 @@ extension FirebaseAppleAuthentification: ASAuthorizationControllerDelegate {
         let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
 
         Auth.auth().signIn(with: credential) { [weak self] (result, error) in
-            print("didScesss")
+
+            // Authorizationでエラー
+            if let error = error {
+                self?.completion?(false, error)
+                return
+            }
+
+            // ログインしているユーザー
+            guard let currentUser = Auth.auth().currentUser else  {
+                self?.completion?(false, FirebaseAppleIDAuthorizationError.userNotFound)
+                return
+            }
+
+            self?.completion?(true, nil)
+            return
         }
+    }
+
+    // 失敗した場合
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        self.completion?(false, error)
     }
 }
 
