@@ -70,7 +70,7 @@ extension FirebaseAppleAuthentification: ASAuthorizationControllerDelegate {
 
         Auth.auth().signIn(with: credential) { [weak self] (result, error) in
 
-            // Authorizationでエラー
+            // サインインでエラー
             if let error = error {
                 self?.completion?(false, FirebaseAppleIDAuthorizationError.unexpectedError)
                 return
